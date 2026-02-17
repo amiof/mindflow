@@ -1,9 +1,13 @@
 # OSX
-#
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
 
 # Xcode
-#
 build/
 *.pbxuser
 !default.pbxuser
@@ -21,10 +25,9 @@ DerivedData
 *.ipa
 *.xcuserstate
 **/.xcode.env.local
+**/xcshareddata/WorkspaceSettings.xcsettings  # added for Xcode 12+
 
 # Android/IntelliJ
-#
-build/
 .idea
 .gradle
 local.properties
@@ -34,20 +37,18 @@ local.properties
 *.keystore
 !debug.keystore
 .kotlin/
+captures/                     # Android test captures
+android/app/build/            # explicit android build output
+android/.gradle/               # already covered by .gradle but more explicit
 
 # node.js
-#
 node_modules/
 npm-debug.log
 yarn-error.log
+yarn-debug.log*               # yarn debug log (more specific)
+lerna-debug.log*               # if using lerna
 
 # fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/
-
 **/fastlane/report.xml
 **/fastlane/Preview.html
 **/fastlane/screenshots
@@ -55,6 +56,8 @@ yarn-error.log
 
 # Bundle artifact
 *.jsbundle
+*.ios.jsbundle                # sometimes generated separately
+*.android.jsbundle
 
 # Ruby / CocoaPods
 **/Pods/
@@ -73,3 +76,52 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Environment files (keep secrets out of repo)
+.env
+.env.local
+.env.*.local                  # e.g., .env.development.local, .env.production.local
+.env.development
+.env.test
+.env.production
+
+# Expo (if you use Expo)
+.expo/
+expo-env.d.ts
+web-build/
+
+# Watchman
+.watchmanconfig
+
+# Metro / React Native bundler
+metro.config.js.bak
+metro.config.js.backup
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# IDE / Editor (beyond Xcode/Android Studio)
+.vscode/
+.idea/                         # already there but good to be explicit
+*.sublime-*
+*.swp
+*.swo
+*~
+*.project
+*.classpath
+.settings/
+.factorypath
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Misc
+*.orig
+*.tgz
+*.bak
+tmp/
+temp/
