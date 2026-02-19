@@ -15,11 +15,11 @@ const Navigationbar = (props:Props) => {
   const {setSelectedNavbar}=props
 
   const tabs: { key: TClickNavbar; icon: any; label: string }[] = [
-    { key: 'brain', icon: <Icon name="brain" size={28} />, label: 'Brain' },
-    { key: 'week', icon: <Icon name="calendar-week" size={28} />, label: 'Week' },
-    { key: 'today', icon: <IconMaterialIcons name="today" size={28} />, label: 'Today' },
-    { key: 'review', icon: <IconIonicons name="reload" size={28} />, label: 'Review' },
-    { key: 'later', icon: <IconMaterialIcons name="watch-later" size={28} />, label: 'Later' },
+    { key: 'brain', icon: <Icon name="brain" size={18} />, label: 'Brain' },
+    { key: 'week', icon: <Icon name="calendar-week" size={18} />, label: 'Week' },
+    { key: 'today', icon: <IconMaterialIcons name="today" size={18} />, label: 'Today' },
+    { key: 'review', icon: <IconIonicons name="reload" size={18} />, label: 'Review' },
+    { key: 'later', icon: <IconMaterialIcons name="watch-later" size={18} />, label: 'Later' },
   ];
 
   const [activeTab, setActiveTab] = useState<TClickNavbar>('brain');
@@ -36,7 +36,7 @@ const Navigationbar = (props:Props) => {
   // const [navbarClicked, setNavbarClicked] = useState<TClickNavbar>("brain")
 
   return (
-    <View className='w-full h-full flex flex-row justify-center items-center gap-1 px-4  '>
+    <View className='w-auto h-1/2 flex flex-row justify-center items-center gap-1 px-1  rounded-full m-4 bg-slate-800'>
       {/* Tabs */}
       {tabs.map((tab, index) => (
         <Pressable
@@ -45,7 +45,7 @@ const Navigationbar = (props:Props) => {
             handlePress(index)
             setSelectedNavbar(tab.key)
           }}
-          className={clsx("flex-1 justify-center items-center rounded-full py-4   ", activeTab === tab.key && "bg-slate-800")}
+          className={clsx("flex-1 justify-center items-center rounded-full py-1 ", activeTab === tab.key && " bg-slate-700" )}
         >
           <View className="items-center">
             {React.cloneElement(tab.icon as any, {
