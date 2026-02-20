@@ -8,15 +8,31 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import TaskCard from './TaskCard';
+import { useQuery, useRealm } from '@realm/react';
+import { Task } from '../../models/taskModel';
+import { BSON } from 'realm';
 
 const Brain = () => {
   const [text, setText] = useState<string>('');
-  const [tasks, setTasks] = useState<string[]>([]);
+  // const [tasks, setTasks] = useState<string[]>([]);
+  const realm = useRealm()
+
+  const tasks = useQuery(Task).sorted("createdAt", true)
 
   const handleAddTask = () => {
     if (text.trim() === '') return;
 
-    setTasks(prevTasks => [...prevTasks, text.trim()]);
+    realm.write(() => {
+      realm.create(Task, {
+        _id: new BSON.ObjectId(),
+        description: text,
+        isDone: false,
+        assignDate:"unAssign",
+        createdAt: new Date(),
+      })
+    })
+
+    // setTasks(prevTasks => [...prevTasks, text.trim()]);
     setText('');
   };
 
@@ -37,7 +53,7 @@ const Brain = () => {
         contentContainerStyle={{ paddingBottom: 20, gap: 15 }}
         showsVerticalScrollIndicator={false}
       >
-        {tasks.length === 0 ? (
+        {tasks?.length === 0 ? (
           <Text style={styles.emptyText}>No tasks yet</Text>
         ) : (
           tasks.map((task, index) => (

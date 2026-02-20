@@ -13,6 +13,8 @@ import {
 } from 'react-native-safe-area-context';
 import "./global.css"
 import Home from './src/pages/home/Home';
+import { RealmProvider } from '@realm/react';
+import { Task } from './src/models/taskModel';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -32,18 +34,20 @@ function AppContent() {
   const { height } = Dimensions.get('window');
 
   return (
-    <View style={styles.container}>
-      {/* <NewAppScreen */}
-      {/*   templateFileName="App.tsx" */}
-      {/*   safeAreaInsets={safeAreaInsets} */}
-      {/* /> */}
-      <View style={{
-        top: safeAreaInsets.top,
-        height: height - safeAreaInsets.top
-      }}>
-        <Home />
+    <RealmProvider schema={[Task]}>
+      <View style={styles.container}>
+        {/* <NewAppScreen */}
+        {/*   templateFileName="App.tsx" */}
+        {/*   safeAreaInsets={safeAreaInsets} */}
+        {/* /> */}
+        <View style={{
+          top: safeAreaInsets.top,
+          height: height - safeAreaInsets.top
+        }}>
+          <Home />
+        </View>
       </View>
-    </View>
+    </RealmProvider>
   );
 }
 

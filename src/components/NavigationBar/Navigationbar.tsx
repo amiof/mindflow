@@ -36,7 +36,7 @@ const Navigationbar = (props:Props) => {
   // const [navbarClicked, setNavbarClicked] = useState<TClickNavbar>("brain")
 
   return (
-    <View className='w-auto h-1/2 flex flex-row justify-center items-center gap-1 px-1  rounded-full m-4 bg-slate-800'>
+    <View className='w-auto h-1/2 flex flex-row justify-center items-center gap-1 px-1  rounded-full m-4 bg-slate-200 border-2 border-slate-300'>
       {/* Tabs */}
       {tabs.map((tab, index) => (
         <Pressable
@@ -45,7 +45,7 @@ const Navigationbar = (props:Props) => {
             handlePress(index)
             setSelectedNavbar(tab.key)
           }}
-          className={clsx("flex-1 justify-center items-center rounded-full py-1 ", activeTab === tab.key && " bg-slate-700" )}
+          className={clsx("flex-1 justify-center items-center rounded-full py-1 ", activeTab === tab.key && " bg-slate-500" )}
         >
           <View className="items-center">
             {React.cloneElement(tab.icon as any, {

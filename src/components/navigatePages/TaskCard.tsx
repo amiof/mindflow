@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, Modal, Pressable, FlatList } from 'react-native'
 import React, { useState } from 'react'
+import { Task, TAssignDate } from '../../models/taskModel'
+import { useRealm } from '@realm/react'
 
 type Props = {
-  task: string
+  task: Task
 }
 
 // Days of the week
@@ -10,18 +12,34 @@ const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sat
 
 const TaskCard = (props: Props) => {
   const { task } = props
+  console.log(task)
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedDay, setSelectedDay] = useState<string | null>(null)
+  const realm = useRealm()
+
+  if (task.assignDate !== "unAssign") {
+    return null
+  }
+
+  const changeAssginDate = (taskItem: Task) => {
+    realm.write(() => {
+      if (selectedDay) {
+        taskItem.assignDate = selectedDay as TAssignDate
+      }
+    })
+  }
+
 
   const handleSelectDay = (day: string) => {
     setSelectedDay(day)
     setModalVisible(false)
+    changeAssginDate(task)
   }
 
   return (
     <>
       <View style={styles.taskItem}>
-        <Text style={styles.taskText}>{task}</Text>
+        <Text style={styles.taskText}>{task.description}</Text>
         {/* Assign button – now a Pressable */}
         <Pressable
           style={styles.assignButton}
